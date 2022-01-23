@@ -27,16 +27,41 @@ I am writing this project for me to better understand system architecture of var
 
 I believe a good architecture is the key to delivering a successful project. A good architecture is required even if you are building a side project or a system for a company while being paid. Once a good architecture is available in front of you well documented, you are more confident and faster as a programmer to hit the deadline of delivering an application (or even a feature within a large ecosystem).
 
-# Rules for system designs
+# Structure of system designs
 
-This is an important section if you wish to contribute, also good for the readers. Architecture diagrams in this repositories might be kept simpler than the actual implementation in real life.
+### 1. Introduction to the system
 
-The purpose system design diagram is to show an abstraction of important components. The diagram should contain following features
+This section briefly explains the app. Any useful text from the app's official webiste or Wikipedia would fit for this
 
+### 2. Use cases and Requirements
+
+This section details use cases of the app that we are studying. And followed by requirements for this system design.
+
+When picking requirements, we try to pick the most high-impact features of the app, for example in Tiktok example, we've picked viewing videos, uploading videos, and receiving personalised feeds.
+
+### 3. Drawing Application Architecture Diagram
+
+What is Application Architecture Diagram?
+
+> [An application architecture diagram comprises a high-level overview of the components and fundamental interactions within the system, e.g. microservices, databases, etc. The application architecture diagram primarily addresses the “What” in relation to the system.](https://medium.com/the-internal-startup/how-to-draw-useful-technical-architecture-diagrams-2d20c9fda90d)
+
+We want to keep our system designs to show an abstraction of important components. The diagram should contain following features
+
+- Be simple
 - All important components of the system to facilitate the requirements
 - System boundaries
-- How the components communicate to each others
-- Arrows connecting components should give a brief idea of how traffic or business logic flows
+  - In an architecture diagram, it is a concept line that divides the system you want to study from 'everything else
+  - It is to include elements that you are interested / specified in the use cases / requirements
+- Show system interactions
+  - Use simple shapes and lines to indicate process flows and the way the different elements communicate to each others
+- Include useful annotations
+  - Add helpful explanation to critical pieces of your diagram
+
+In the diagram, we want to include following components
+
+- Application service layers
+- Data storage layers
+- Usually a scalable system includes load balancer, event stream, queue, databases (master/slave, replication or sharding model) and in-memory key-value stores such as Redis
 
 # References
 
