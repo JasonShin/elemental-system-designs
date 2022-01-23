@@ -29,7 +29,7 @@ I believe a good architecture is the key to delivering a successful project. A g
 
 # Contributing
 
-Please check CONTRIBUTING.md
+Please check [CONTRIBUTING.md](https://github.com/JasonShin/elemental-system-designs/blob/master/CONTRIBUTING.md)
 
 ## Contributors ✨
 
