@@ -9,7 +9,7 @@
 
 # What is this?
 
-Elemental System Designs is an open source project to document system architecture design of popular apps and open source projects that we want to imagine its internals. The project focuses on the high level abstraction architecture based on use cases of an app that we can observe while using them in real life.
+Elemental System Designs is an open source project to document system architecture design of popular apps and open source projects that we want to study. The project focuses on the high level abstraction architecture based on use cases of an app that we can observe while using them in real life.
 
 We will focus on features with high-impact of the selected apps, while proposing high scalable and resilient architecture that could scale infinitely. We welcome anyone who is actually in the same field as the app of proposed architecture to give us ideas around industry specific bottlenecks and your solution to the problem.
 
@@ -39,7 +39,13 @@ This section details use cases of the app that we are studying. And followed by 
 
 When picking requirements, we try to pick the most high-impact features of the app, for example in Tiktok example, we've picked viewing videos, uploading videos, and receiving personalised feeds.
 
-### 3. Drawing Application Architecture Diagram
+### 3. Constraints
+
+- Identify traffic and data handling at scale
+- Scale of the system such as requests per second, request types, data written per second, data read per second
+- Special system requirements such as multi-threading
+
+### 4. Drawing Application Architecture Diagram
 
 What is Application Architecture Diagram?
 
@@ -62,6 +68,14 @@ In the diagram, we want to include following components
 - Application service layers
 - Data storage layers
 - Usually a scalable system includes load balancer, event stream, queue, databases (master/slave, replication or sharding model) and in-memory key-value stores such as Redis
+
+### 5. Understand Bottlenecks
+
+- Describe any industry specific bottleneck (e.g. security concerns in financial applications)
+- Maybe the application needs a CDN? Load balancer? Data is so huge so database should be sharded?
+- Maybe the application needs complex query to fetch data, caching the result somewhere such as in-memory cache store would be beneficial?
+
+### 6. Scaling
 
 # References
 
