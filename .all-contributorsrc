@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "JasonShin",
+      "name": "Jason Shin",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2525002?v=4",
+      "profile": "https://github.com/JasonShin",
+      "contributions": [
+        "infra"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "elemental-system-designs",
+  "projectOwner": "JasonShin",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
