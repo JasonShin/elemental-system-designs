@@ -27,6 +27,22 @@ I am writing this project for me to better understand system architecture of var
 
 I believe a good architecture is the key to delivering a successful project. A good architecture is required even if you are building a side project or a system for a company while being paid. Once a good architecture is available in front of you well documented, you are more confident and faster as a programmer to hit the deadline of delivering an application (or even a feature within a large ecosystem).
 
+# Rules for system designs
+
+This is an important section if you wish to contribute, also good for the readers. Architecture diagrams in this repositories might be kept simpler than the actual implementation in real life.
+
+The purpose system design diagram is to show an abstraction of important components. The diagram should contain following features
+
+- All important components of the system to facilitate the requirements
+- System boundaries
+- How the components communicate to each others
+- Arrows connecting components should give a brief idea of how traffic or business logic flows
+
+# References
+
+- [How to draw 5 types of architectural diagrams](https://www.lucidchart.com/blog/how-to-draw-architectural-diagrams)
+- [Introduction to System Architecture Diagram](https://medium.com/backendarmy/introduction-to-system-architecture-design-fcd4f327b6c9)
+
 # Contributing
 
 Please check [CONTRIBUTING.md](https://github.com/JasonShin/elemental-system-designs/blob/master/CONTRIBUTING.md)
