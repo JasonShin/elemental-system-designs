@@ -69,13 +69,38 @@ In the diagram, we want to include following components
 - Data storage layers
 - Usually a scalable system includes load balancer, event stream, queue, databases (master/slave, replication or sharding model) and in-memory key-value stores such as Redis
 
-### 5. Understand Bottlenecks
+### 5. Component Design
+
+- Component + specific **APIs** required for each of them.
+  - The project focuses on the high level design, we should use component design section to enhance the detail that could be too vague in the application architecture diagram. This is the section to write anything important per component level
+
+- Database schema design
+  - A simplified database schema design that focused on only important ones in relation to the requirements and use cases
+
+### 6. Understanding Bottlenecks
 
 - Describe any industry specific bottleneck (e.g. security concerns in financial applications)
 - Maybe the application needs a CDN? Load balancer? Data is so huge so database should be sharded?
 - Maybe the application needs complex query to fetch data, caching the result somewhere such as in-memory cache store would be beneficial?
 
-### 6. Scaling
+### 7. Scaling
+
+##### Vertical Scaling
+
+Provide suggestions on adding more power to each component where it's necessary and important.
+
+##### Horizontal Scaling
+
+Wherever possible, service components should be horizontally scalable.
+
+##### Caching suggestions
+
+Can the design take advantage of any following caching strategies?
+
+- Can any component take an advantage of application layer caching [LRU / LFU](https://en.wikipedia.org/wiki/Cache_replacement_policies)?
+- Database layer caching?
+- In-memory caches such as Redis or Memcache?
+- CDN to cache static assets?
 
 # References
 
