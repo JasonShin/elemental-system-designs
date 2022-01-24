@@ -40,4 +40,35 @@ TikTok is a video-focused social networking service owned by Chinese company Byt
 
 <img src="./assets/tiktok.png" />
 
+# Design Core Components
+
+#### 1. Core Service
+
+...
+
+#### 2. UploadVideoService
+
+...
+
+#### 3. UserActivityObserver
+
+...
+
+#### 4. VideoCacher
+
+...
+
+#### 5. VideoCompressor
+
+...
+
+#### 6. Glacier to Standard
+
+...
+
+#### 7. Standard to Glacier
+
+...
+
+
 
