@@ -42,9 +42,11 @@ TikTok is a video-focused social networking service owned by Chinese company Byt
 
 # Design Core Components
 
-#### 1. Core Service
+Use case: user enters the app and gets the initial video feeds
 
-...
+- The **User** sends a request to get the latest video feeds from **Core Service**, running as [reverse proxy](https://en.wikipedia.org/wiki/Reverse_proxy) in front of a [load balancer](https://en.wikipedia.org/wiki/Load_balancing_(computing)).
+- **Core Service** queries the fresh user video feeds from **Meta DB**
+- 
 
 #### 2. UploadVideoService
 
