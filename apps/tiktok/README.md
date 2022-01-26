@@ -54,6 +54,7 @@ TikTok is a video-focused social networking service owned by Chinese company Byt
 - The User records a video on a mobile device and uploads to **UploadVideoService**
   - The raw uncompressed video arrives to a raw video bucket in S3
 - **VideoCompressor** receives a job to compress the video
+  - The job is received through a queue (e.g. SQS)
   - **VideoCompressor** is a queue handler service that receives a new job to compressed videos through a queue
   - If compression fails, the message in the queue is retained until VideoCompressor can complete it again
   - compression here is lowering video resolution. As users with modern smartphone can record extremely high resolution videos, but when we serve videos, we want them to be served fast by lowering the file size in general
@@ -89,3 +90,5 @@ TikTok is a video-focused social networking service owned by Chinese company Byt
   - However, the automatic CDN caching requires at lease one user to actually view the video and triggers CDN to cache in lazily
 - For many scenarios, we would want to eagerly cache newly uploaded videos into CDN cache so users get the latest content as fast as possible in any regions that they are watching from.
 - **VideoCacher** runs every 15 minutes to force push new videos into CDN cache to achieve this
+
+#### Use case: moving popular videos 
