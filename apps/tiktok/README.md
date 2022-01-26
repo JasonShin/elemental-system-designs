@@ -67,13 +67,19 @@ TikTok is a video-focused social networking service owned by Chinese company Byt
    1. for all videos that are in standard S3 buckets
    2. for each video in standard S3 bucket
       1. fetch time series data for this video from Redis
-      2. if this video has not been watch recently (within 7 days)
+      2. if this video has not been watched recently (within 7 days)
          1. move the video to glacier
          2. set this video to be archived in MetaDB
 
 - each video (that are stored in S3 standard bucket) in redis would have an array of values
-  - [number, number, number, number, number]
-  - within (5 | 30 | 1 | 7 | 30) mins or hours or days watch count
+  - key structure `videos/#id`
+  - value structure
+    - `[number, number, number, number, number]`
+    - within `(5 | 30 | 1 | 7 | 30)` mins or hours or days watch count
+    - Examples
+      - For an old and unpopualr video `[0, 0, 0, 0, 0]`
+      - For a new and popular video `[100, 50, 1000, 0, 0]`
+      - For a video that is losing popularity `[0, 0, 0, 1000, 5000]`
 
 
 #### 4. VideoCacher
