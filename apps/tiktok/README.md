@@ -38,37 +38,54 @@ TikTok is a video-focused social networking service owned by Chinese company Byt
 
 # Application Architecture Diagram
 
-<img src="./assets/tiktok.png" />
+<img src="assets/tiktok-v2.png"  alt="tiktok-v2"/>
 
 # Design Core Components
 
-#### 1. Core Service
+#### Use case: user enters the app and gets the initial video feeds
 
-...
+- The **User** sends a request to get the latest video feeds from **Core Service**, running as [reverse proxy](https://en.wikipedia.org/wiki/Reverse_proxy) in front of a [load balancer](https://en.wikipedia.org/wiki/Load_balancing_(computing)).
+- **Core Service** queries the fresh user video feeds from **Meta DB**
+- User receives a few items containing meta-data of videos including MP4 file URL
+- Videos are served by [CDN](https://en.wikipedia.org/wiki/Content_delivery_network) based on the user's location
 
-#### 2. UploadVideoService
+#### Use case: User uploads video
 
-...
+- The User records a video on a mobile device and uploads to **UploadVideoService**
+  - The raw uncompressed video arrives to a raw video bucket in S3
+- **VideoCompressor** receives a job to compress the video
+  - **VideoCompressor** is a queue handler service that receives a new job to compressed videos through a queue
+  - If compression fails, the message in the queue is retained until VideoCompressor can complete it again
+  - compression here is lowering video resolution. As users with modern smartphone can record extremely high resolution videos, but when we serve videos, we want them to be served fast by lowering the file size in general
+- **UploadVideoService** saves the video's meta data into database
 
-#### 3. UserActivityObserver
+#### Use case: old and unpopular videos moves to S3 glacier automatically
 
-...
+- If a video is older than 7 days and haven't received any views recently, **Standard to Glacier job** runs and moves these videos into S3 glacier for cost saving
+- Such job's logic would be written like following:
 
-#### 4. VideoCacher
+1. filter_and_move_videos_to_glaicer()
+   1. for all videos that are in standard S3 buckets
+   2. for each video in standard S3 bucket
+      1. fetch time series data for this video from Redis
+      2. if this video has not been watched recently (within 7 days)
+         1. move the video to glacier
+         2. set this video to be archived in MetaDB
 
-...
+- And the job would run every day, but configurable by the system admins
+- each video (that are stored in S3 standard bucket) in redis would have an array of values
+  - key structure `videos/#id`
+  - value structure
+    - `[number, number, number, number, number]`
+    - within `(5 | 30 | 1 | 7 | 30)` minutes or hours or days watch count
+    - Examples
+      - For an old and unpopular video `[0, 0, 0, 0, 0]`
+      - For a new and popular video `[100, 50, 1000, 0, 0]`
+      - For a video that is losing popularity `[0, 0, 0, 1000, 5000]`
 
-#### 5. VideoCompressor
+#### Use case: Caching videos in CDN
 
-...
-
-#### 6. Glacier to Standard
-
-...
-
-#### 7. Standard to Glacier
-
-...
-
-
-
+- Caching in CDN these days would be done automatically if we are using CloudFront or similar
+  - However, the automatic CDN caching requires at lease one user to actually view the video and triggers CDN to cache in lazily
+- For many scenarios, we would want to eagerly cache newly uploaded videos into CDN cache so users get the latest content as fast as possible in any regions that they are watching from.
+- **VideoCacher** runs every 15 minutes to force push new videos into CDN cache to achieve this
