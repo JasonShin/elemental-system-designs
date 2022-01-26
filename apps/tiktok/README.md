@@ -57,9 +57,25 @@ Use case: User uploads video
   - **VideoCompressor** is a queue handler service that receives a new job to compressed videos through a queue
   - If compression fails, the message in the queue is retained until VideoCompressor can complete it again
   - compression here is lowering video resolution. As users with modern smartphone can record extremely high resolution videos, but when we serve videos, we want them to be served fast by lowering the file size in general
+- **UploadVideoService** saves the video's meta data into database
+
+Use case: old and unpopular videos moves to S3 glacier automatically
+
+- If a video is older than 7 days and haven't received almost any views, Standard to Glacier job runs and moves these videos into S3 glacier for cost saving
+
+1. move_any_old_videos_to_glaicer()
+   1. for all videos that are in standard S3 buckets
+   2. for each video in standard S3 bucket
+      1. fetch time series data for this video from Redis
+      2. if this video has not been watch recently (within 7 days)
+         1. move the video to glacier
+         2. set this video to be archived in MetaDB
+
+- each video (that are stored in S3 standard bucket) in redis would have an array of values
+  - [number, number, number, number, number]
+  - within (5 | 30 | 1 | 7 | 30) mins or hours or days watch count
 
 
-#### 3. UserActivityObserver
 
 ...
 
