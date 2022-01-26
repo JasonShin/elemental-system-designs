@@ -42,14 +42,14 @@ TikTok is a video-focused social networking service owned by Chinese company Byt
 
 # Design Core Components
 
-Use case: user enters the app and gets the initial video feeds
+#### Use case: user enters the app and gets the initial video feeds
 
 - The **User** sends a request to get the latest video feeds from **Core Service**, running as [reverse proxy](https://en.wikipedia.org/wiki/Reverse_proxy) in front of a [load balancer](https://en.wikipedia.org/wiki/Load_balancing_(computing)).
 - **Core Service** queries the fresh user video feeds from **Meta DB**
 - User receives a few items containing meta-data of videos including MP4 file URL
 - Videos are served by [CDN](https://en.wikipedia.org/wiki/Content_delivery_network) based on the user's location
 
-Use case: User uploads video
+#### Use case: User uploads video
 
 - The User records a video on a mobile device and uploads to **UploadVideoService**
   - The raw uncompressed video arrives to a raw video bucket in S3
@@ -59,7 +59,7 @@ Use case: User uploads video
   - compression here is lowering video resolution. As users with modern smartphone can record extremely high resolution videos, but when we serve videos, we want them to be served fast by lowering the file size in general
 - **UploadVideoService** saves the video's meta data into database
 
-Use case: old and unpopular videos moves to S3 glacier automatically
+#### Use case: old and unpopular videos moves to S3 glacier automatically
 
 - If a video is older than 7 days and haven't received almost any views, Standard to Glacier job runs and moves these videos into S3 glacier for cost saving
 
@@ -75,9 +75,6 @@ Use case: old and unpopular videos moves to S3 glacier automatically
   - [number, number, number, number, number]
   - within (5 | 30 | 1 | 7 | 30) mins or hours or days watch count
 
-
-
-...
 
 #### 4. VideoCacher
 
