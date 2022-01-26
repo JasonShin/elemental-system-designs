@@ -102,7 +102,7 @@ TikTok is a video-focused social networking service owned by Chinese company Byt
 
 # Notes
 
-1. In this document, we haven't used more storage classes for S3 buckets apart from `standard` vs `glaicer`. `Standard` just means a bucket with fast retrieval of objects but more expensive. `Glaicer` means slow retrieval but cheaper to store.
+1. In this document, we haven't used [more specific storage classes for S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html) buckets apart from `standard` vs `glaicer`. `Standard` just means a bucket with fast retrieval of objects but more expensive. `Glaicer` means slow retrieval but cheaper to store.
 
 # References
 
