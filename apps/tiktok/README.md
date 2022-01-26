@@ -92,3 +92,19 @@ TikTok is a video-focused social networking service owned by Chinese company Byt
 - **VideoCacher** runs every 15 minutes to force push new videos into CDN cache to achieve this
 
 #### Use case: moving popular videos back to S3 standard
+
+- A video that was moved to Glacier due to unpopularity suddenly receives a lot of views. In this situation, we need to move the video from Glaicer to Standard bucket class
+- When core service receives a request to fetch video feeds, it sends the latest video feeds information to **UserActivityObserver** service
+- **UserActivityObserver** manages a temporary key value list of currently trending videos in Redis cache store
+  - When a video receives a lot of views in a short period of time, it pushes a message to **CoreEventStream** to lift its storage tier from Glacier to Standard
+  - If the video is already in standard storage, the message gets ignored
+  - Otherwise, **Glacier to Standard service** picks up the event and moves the video from glacier to standard tier
+
+# Notes
+
+1. In this document, we haven't used more storage classes for S3 buckets apart from `standard` vs `glaicer`. `Standard` just means a bucket with fast retrieval of objects but more expensive. `Glaicer` means slow retrieval but cheaper to store.
+
+# References
+
+- S3 has lifecycle rule that let you specify a specific age of the object that you want to move to Glacier tier automatically https://docs.aws.amazon.com/AmazonS3/latest/userguide/intro-lifecycle-rules.html. This is a nice feature of S3 but wouldn't solve Tiktok use case's problem.
+
