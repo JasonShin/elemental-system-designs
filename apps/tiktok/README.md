@@ -46,11 +46,16 @@ Use case: user enters the app and gets the initial video feeds
 
 - The **User** sends a request to get the latest video feeds from **Core Service**, running as [reverse proxy](https://en.wikipedia.org/wiki/Reverse_proxy) in front of a [load balancer](https://en.wikipedia.org/wiki/Load_balancing_(computing)).
 - **Core Service** queries the fresh user video feeds from **Meta DB**
-- 
+- User receives a few items containing meta-data of videos including MP4 file URL
+- Videos are served by [CDN](https://en.wikipedia.org/wiki/Content_delivery_network) based on the user's location
 
-#### 2. UploadVideoService
+Use case: User uploads video
 
-...
+- The User records a video on a mobile device and uploads to **UploadVideoService**
+  - The raw uncompressed video arrives to a raw video bucket in S3
+- **VideoCompressor** receives a job to compress the video
+  - **VideoCompressor** is a queue handler service that receives a new job to compressed videos through a queue
+  - If compression fails, the message in the queue is retained until VideoCompressor can complete it again
 
 #### 3. UserActivityObserver
 
