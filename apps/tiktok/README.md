@@ -38,7 +38,7 @@ TikTok is a video-focused social networking service owned by Chinese company Byt
 
 # Application Architecture Diagram
 
-<img src="assets/tiktok-v2.png"  alt="tiktok-v2"/>
+<img src="assets/tiktok-v4.png"  alt="tiktok-v4"/>
 
 # Design Core Components
 
@@ -91,4 +91,4 @@ TikTok is a video-focused social networking service owned by Chinese company Byt
 - For many scenarios, we would want to eagerly cache newly uploaded videos into CDN cache so users get the latest content as fast as possible in any regions that they are watching from.
 - **VideoCacher** runs every 15 minutes to force push new videos into CDN cache to achieve this
 
-#### Use case: moving popular videos 
+#### Use case: moving popular videos back to S3 standard
