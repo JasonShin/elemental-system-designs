@@ -61,7 +61,7 @@ TikTok is a video-focused social networking service owned by Chinese company Byt
 
 #### Use case: old and unpopular videos moves to S3 glacier automatically
 
-- If a video is older than 7 days and haven't received almost any views, Standard to Glacier job runs and moves these videos into S3 glacier for cost saving
+- If a video is older than 7 days and haven't received any views recently, Standard to Glacier job runs and moves these videos into S3 glacier for cost saving
 
 1. move_any_old_videos_to_glaicer()
    1. for all videos that are in standard S3 buckets
@@ -81,10 +81,7 @@ TikTok is a video-focused social networking service owned by Chinese company Byt
       - For a new and popular video `[100, 50, 1000, 0, 0]`
       - For a video that is losing popularity `[0, 0, 0, 1000, 5000]`
 
-
-#### 4. VideoCacher
-
-...
+#### Use case: 
 
 #### 5. VideoCompressor
 
