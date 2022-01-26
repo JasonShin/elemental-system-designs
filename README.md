@@ -27,6 +27,11 @@ I am writing this project for me to better understand system architecture of var
 
 I believe a good architecture is the key to delivering a successful project. A good architecture is required even if you are building a side project or a system for a company while being paid. Once a good architecture is available in front of you well documented, you are more confident and faster as a programmer to hit the deadline of delivering an application (or even a feature within a large ecosystem).
 
+# System Designs
+
+1. [tiktok](./apps/tiktok/README.md)
+2. [WIP] Dropbox
+
 # Structure of system designs
 
 ### 1. Introduction to the system
