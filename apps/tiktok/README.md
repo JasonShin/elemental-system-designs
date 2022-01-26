@@ -38,7 +38,7 @@ TikTok is a video-focused social networking service owned by Chinese company Byt
 
 # Application Architecture Diagram
 
-<img src="./assets/tiktok.png" />
+<img src="assets/tiktok-v2.png"  alt="tiktok-v2"/>
 
 # Design Core Components
 
@@ -56,6 +56,8 @@ Use case: User uploads video
 - **VideoCompressor** receives a job to compress the video
   - **VideoCompressor** is a queue handler service that receives a new job to compressed videos through a queue
   - If compression fails, the message in the queue is retained until VideoCompressor can complete it again
+  - compression here is lowering video resolution. As users with modern smartphone can record extremely high resolution videos, but when we serve videos, we want them to be served fast by lowering the file size in general
+
 
 #### 3. UserActivityObserver
 
