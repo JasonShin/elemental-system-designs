@@ -61,9 +61,11 @@ TikTok is a video-focused social networking service owned by Chinese company Byt
 
 #### Use case: old and unpopular videos moves to S3 glacier automatically
 
-- If a video is older than 7 days and haven't received any views recently, Standard to Glacier job runs and moves these videos into S3 glacier for cost saving
+- If a video is older than 7 days and haven't received any views recently, `Standard to Glacier job` runs and moves these videos into S3 glacier for cost saving
 
-1. move_any_old_videos_to_glaicer()
+- Such job's logic would be written like following:
+
+1. filter_and_move_videos_to_glaicer()
    1. for all videos that are in standard S3 buckets
    2. for each video in standard S3 bucket
       1. fetch time series data for this video from Redis
