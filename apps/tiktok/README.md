@@ -100,6 +100,32 @@ TikTok is a video-focused social networking service owned by Chinese company Byt
   - If the video is already in standard storage, the message gets ignored
   - Otherwise, **Glacier to Standard service** picks up the event and moves the video from glacier to standard tier
 
+# Back-of-the-envelope estimation
+
+#### [WIP] Estimate QPS and Storage requirements
+
+**Assumptions:**
+
+- 1 billion active users per month
+- 50% users use Tiktok daily
+- Users post 0.05 Tiktok video per day on average
+- 100% tiktok contains a media, hence it's a platform to watch short videos
+- Data is stored for 5 years
+
+**Estimations:**
+
+1. Query per second (QPS) estimation:
+   1. Daily active users (DAU) = 1 billion * 50% = 500 million
+   2. Tiktok QPS = 500 million * 0.05 posts / 24 hour / 3600 seconds = ~180
+   3. Peak QPS = 2 * QPS = ~360
+
+2. Storage estimation
+   1. Average tiktok post size
+      1. post_id: 64 bytes
+      2. title/description: 140 bytes
+      3. media: 10MB
+   2. Media storage
+      
 # Notes
 
 1. In this document, we haven't used [more specific storage classes for S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html) buckets apart from `standard` vs `glaicer`. `Standard` just means a bucket with fast retrieval of objects but more expensive. `Glaicer` means slow retrieval but cheaper to store.
