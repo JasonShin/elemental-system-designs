@@ -102,7 +102,7 @@ TikTok is a video-focused social networking service owned by Chinese company Byt
 
 # Back-of-the-envelope estimation
 
-#### [WIP] Estimate QPS and Storage requirements
+#### [WIP] QPS and Storage requirements estimation
 
 **Assumptions:**
 
