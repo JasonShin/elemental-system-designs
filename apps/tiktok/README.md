@@ -38,7 +38,7 @@ TikTok is a video-focused social networking service owned by Chinese company Byt
 
 # Application Architecture Diagram
 
-<img src="assets/tiktok-v5.png"  alt="tiktok-v4"/>
+<img src="assets/tiktok-v6.png"  alt="tiktok-v4"/>
 
 # Design Core Components
 
