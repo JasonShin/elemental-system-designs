@@ -74,6 +74,8 @@ In the diagram, we want to include following components
 - Data storage layers
 - Usually a scalable system includes load balancer, event stream, queue, databases (master/slave, replication or sharding model) and in-memory key-value stores such as Redis
 
+For the icons used in the diagram, please check [this link](./assets/README.md)
+
 ### 5. Component Design
 
 - Component + specific **APIs** required for each of them.
