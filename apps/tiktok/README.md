@@ -128,9 +128,9 @@ TikTok is a video-focused social networking service owned by Chinese company Byt
       
 # Notes
 
-1. In this document, we haven't used [more specific storage classes for S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html) buckets apart from `standard` vs `glaicer`. `Standard` just means a bucket with fast retrieval of objects but more expensive. `Glaicer` means slow retrieval but cheaper to store.
+1. In this document, we haven't used Intelligent-Tiering in S3 because it was built on an assumption that we may not be using AWS for our cloud provider. However, if you are using AWS primarily, you can simply replace the components that handle moving videos between standard and glacier with [S3 Intelligent-Tiering storage class](https://aws.amazon.com/s3/storage-classes/intelligent-tiering/)
 
 # References
 
 - S3 has lifecycle rule that let you specify a specific age of the object that you want to move to Glacier tier automatically https://docs.aws.amazon.com/AmazonS3/latest/userguide/intro-lifecycle-rules.html. This is a nice feature of S3 but wouldn't solve Tiktok use case's problem.
-
+- S3 has Intelligent-Tiering storage class, that moves certain videos to Infrequent access tiers, such as Glacier if it hasn't been access for X days (e.g. 30 days) https://aws.amazon.com/s3/storage-classes/intelligent-tiering/
