@@ -26,7 +26,6 @@ impl TokenBucket {
             let mut bucket = bucket.lock().await;
             if bucket.tokens < bucket.capacity {
                 bucket.tokens += 1;
-                println!("{} tokens remaining", bucket.tokens);
             }
         }
     }
@@ -68,11 +67,9 @@ impl RateLimiter {
         }
         let token_bucket = &self.buckets.get(&ip.to_string());
         let mut bucket = &mut token_bucket.unwrap().lock().await;
-        if bucket.take() {
-            true
-        } else {
-            false
-        }
+
+        // It should either return true or false
+        bucket.take()
     }
 }
 
