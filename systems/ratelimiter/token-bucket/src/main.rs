@@ -47,18 +47,22 @@ impl TokenBucket {
 
 struct RateLimiter {
     buckets: HashMap<String, Arc<Mutex<TokenBucket>>>,
+    bucket_capacity: usize,
+    bucket_refill_speed: usize,
 }
 
 impl RateLimiter {
-    fn new() -> Self {
+    fn new(bucket_capacity: usize, bucket_refill_speed: usize) -> Self {
         RateLimiter {
             buckets: HashMap::new(),
+            bucket_capacity,
+            bucket_refill_speed,
         }
     }
 
     async fn is_allowed(&mut self, ip: &str) -> bool {
         if !self.buckets.contains_key(ip) {
-            let token_bucket = Arc::new(Mutex::new(TokenBucket::new(10, 20000)));
+            let token_bucket = Arc::new(Mutex::new(TokenBucket::new(self.bucket_capacity, self.bucket_refill_speed)));
             self.buckets.insert(ip.to_string(), token_bucket.clone());
             let refill_bucket = Arc::clone(&token_bucket);
             tokio::spawn(async move {
@@ -75,7 +79,7 @@ impl RateLimiter {
 
 #[tokio::main]
 async fn main() {
-    let mut rate_limiter = RateLimiter::new();
+    let mut rate_limiter = RateLimiter::new(10, 20000);
 
     loop {
         {
